@@ -11,5 +11,8 @@ class AppDelegate
       defer: false)
     @mainWindow.title = NSBundle.mainBundle.infoDictionary['CFBundleName']
     @mainWindow.orderFrontRegardless
+
+    @layout = MainLayout.new
+    @mainWindow.contentView = @layout.view
   end
 end
