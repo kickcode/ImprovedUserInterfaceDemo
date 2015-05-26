@@ -1,10 +1,12 @@
 class MainLayout < MotionKit::Layout
+  SIDEBAR_WIDTH = 150
+
   def layout
     add NSBox, :sidebar do
       title "Sidebar"
       constraints do
         height.equals(:superview)
-        width.equals(:superview).times(0.3)
+        width.is SIDEBAR_WIDTH
 
         min_left.is 0
         min_top.is 0
@@ -14,7 +16,7 @@ class MainLayout < MotionKit::Layout
       title "Content"
       constraints do
         height.equals(:superview)
-        width.equals(:superview).times(0.7).minus(10)
+        width.equals(:superview).minus(SIDEBAR_WIDTH + 10)
 
         min_right.is 0
         min_top.is 0
