@@ -12,3 +12,6 @@ PLATFORMS
 DEPENDENCIES
   motion-kit
   rake
+
+BUNDLED WITH
+   1.10.3
