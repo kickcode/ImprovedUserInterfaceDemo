@@ -12,6 +12,20 @@ class MainLayout < MotionKit::Layout
         min_left.is 0
         min_top.is 0
       end
+
+      add NSTextField, :sidebar_heading do
+        bezeled false
+        drawsBackground false
+        editable false
+        selectable false
+        stringValue "Sidebar"
+        constraints do
+          width.equals(:superview).minus(20)
+
+          min_left.is 10
+          min_top.is 10
+        end
+      end
     end
     add NSView, :content do
       wantsLayer true
@@ -22,6 +36,20 @@ class MainLayout < MotionKit::Layout
 
         min_left.is SIDEBAR_WIDTH
         min_top.is 0
+      end
+
+      add NSTextField, :content_heading do
+        bezeled false
+        drawsBackground false
+        editable false
+        selectable false
+        stringValue "Content"
+        constraints do
+          width.equals(:superview).minus(20)
+
+          min_left.is 10
+          min_top.is 10
+        end
       end
     end
   end
