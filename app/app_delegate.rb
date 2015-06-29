@@ -1,5 +1,6 @@
 class AppDelegate
   TOOLBAR_IDENTIFIER = "AppToolbar"
+  INCREMENT_TOOLBAR_ITEM_IDENTIFIER = "IncrementToolbarItem"
 
   def applicationDidFinishLaunching(notification)
     buildMenu
@@ -24,20 +25,31 @@ class AppDelegate
 
     @content = @layout.get(:content)
 
+    @content_heading = @layout.get(:content_heading)
+
     NSColorPanel.sharedColorPanel.target = self
     NSColorPanel.sharedColorPanel.action = 'color_selected:'
   end
 
   def toolbarAllowedItemIdentifiers(toolbar)
-    [NSToolbarShowColorsItemIdentifier]
+    [NSToolbarShowColorsItemIdentifier, INCREMENT_TOOLBAR_ITEM_IDENTIFIER]
   end
 
   def toolbarDefaultItemIdentifiers(toolbar)
-    [NSToolbarShowColorsItemIdentifier]
+    [NSToolbarShowColorsItemIdentifier, INCREMENT_TOOLBAR_ITEM_IDENTIFIER]
   end
 
   def toolbar(toolbar, itemForItemIdentifier: identifier, willBeInsertedIntoToolbar: flag)
-    nil
+    if identifier == INCREMENT_TOOLBAR_ITEM_IDENTIFIER
+      item = NSToolbarItem.alloc.initWithItemIdentifier(INCREMENT_TOOLBAR_ITEM_IDENTIFIER)
+      item.label = "Increment"
+      item.toolTip = "Increment our content view counter."
+      item.target = self
+      item.action = 'increment:'
+      item
+    else
+      nil
+    end
   end
 
   def toolbarWillAddItem(notification)
@@ -47,5 +59,11 @@ class AppDelegate
 
   def color_selected(sender)
     @content.backgroundColor = sender.color
+  end
+
+  def increment(toolbar)
+    @content_counter ||= 0
+    @content_counter += 1
+    @content_heading.stringValue = "#{@content_counter} times"
   end
 end
