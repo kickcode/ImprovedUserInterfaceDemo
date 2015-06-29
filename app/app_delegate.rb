@@ -21,6 +21,11 @@ class AppDelegate
     @toolbar.displayMode = NSToolbarDisplayModeLabelOnly
     @toolbar.delegate = self
     @mainWindow.setToolbar(@toolbar)
+
+    @content = @layout.get(:content)
+
+    NSColorPanel.sharedColorPanel.target = self
+    NSColorPanel.sharedColorPanel.action = 'color_selected:'
   end
 
   def toolbarAllowedItemIdentifiers(toolbar)
@@ -33,5 +38,9 @@ class AppDelegate
 
   def toolbar(toolbar, itemForItemIdentifier: identifier, willBeInsertedIntoToolbar: flag)
     nil
+  end
+
+  def color_selected(sender)
+    @content.backgroundColor = sender.color
   end
 end
