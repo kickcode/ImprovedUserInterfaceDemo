@@ -40,6 +40,11 @@ class AppDelegate
     nil
   end
 
+  def toolbarWillAddItem(notification)
+    toolbar_item = notification.userInfo.objectForKey('item')
+    toolbar_item.label = "Choose Content Background Color" if toolbar_item.itemIdentifier == NSToolbarShowColorsItemIdentifier
+  end
+
   def color_selected(sender)
     @content.backgroundColor = sender.color
   end
