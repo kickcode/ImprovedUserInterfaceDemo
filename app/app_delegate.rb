@@ -1,6 +1,7 @@
 class AppDelegate
   TOOLBAR_IDENTIFIER = "AppToolbar"
   INCREMENT_TOOLBAR_ITEM_IDENTIFIER = "IncrementToolbarItem"
+  TAB_VIEW_ITEM_IDENTIFIER = "TabViewItem"
 
   def applicationDidFinishLaunching(notification)
     buildMenu
@@ -29,6 +30,17 @@ class AppDelegate
 
     NSColorPanel.sharedColorPanel.target = self
     NSColorPanel.sharedColorPanel.action = 'color_selected:'
+
+    @content_tabs = @layout.get(:content_tabs)
+    colors = [NSColor.redColor, NSColor.greenColor, NSColor.blueColor]
+    [1, 2, 3].each do |number|
+      @tab_view_item = NSTabViewItem.alloc.initWithIdentifier("#{TAB_VIEW_ITEM_IDENTIFIER}_#{number}")
+      @tab_view_item.label = "test tab #{number}"
+      @tab_view_item.view = NSView.alloc.initWithFrame(@content_tabs.contentRect)
+      @tab_view_item.view.wantsLayer = true
+      @tab_view_item.view.backgroundColor = colors.delete(colors.shuffle.first)
+      @content_tabs.addTabViewItem(@tab_view_item)
+    end
   end
 
   def toolbarAllowedItemIdentifiers(toolbar)

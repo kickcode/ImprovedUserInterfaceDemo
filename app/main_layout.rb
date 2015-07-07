@@ -51,6 +51,13 @@ class MainLayout < MotionKit::Layout
           min_top.is 10
         end
       end
+
+      add NSTabView, :content_tabs do
+        constraints do
+          width.equals(:superview)
+          height.equals(:superview).minus(30)
+        end
+      end
     end
   end
 end
