@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     dbt (1.1.5)
-    motion-kit (0.17.0)
+    motion-kit (0.18.0)
       dbt (~> 1.1.5)
     rake (10.4.2)
 

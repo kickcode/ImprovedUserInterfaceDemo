@@ -1,5 +1,6 @@
 class MainLayout < MotionKit::Layout
   SIDEBAR_WIDTH = 150
+  TAB_VIEW_ITEM_IDENTIFIER = "TabViewItem"
 
   def layout
     add NSView, :sidebar do
@@ -56,6 +57,14 @@ class MainLayout < MotionKit::Layout
         constraints do
           width.equals(:superview)
           height.equals(:superview).minus(30)
+        end
+
+        colors = [NSColor.redColor, NSColor.greenColor, NSColor.blueColor]
+        [1, 2, 3].each do |number|
+          add_tab "#{TAB_VIEW_ITEM_IDENTIFIER}_#{number}", "test tab #{number}" do
+            wantsLayer true
+            backgroundColor colors.delete(colors.shuffle.first)
+          end
         end
       end
     end
