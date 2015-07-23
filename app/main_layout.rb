@@ -64,6 +64,22 @@ class MainLayout < MotionKit::Layout
           add_tab "#{TAB_VIEW_ITEM_IDENTIFIER}_#{number}", "test tab #{number}" do
             wantsLayer true
             backgroundColor colors.delete(colors.shuffle.first)
+
+            add NSTextField, :"tab_view_item_#{number}_label" do
+              bezeled false
+              drawsBackground false
+              editable false
+              selectable false
+              stringValue "Tab Number #{number}"
+
+              constraints do
+                width.equals(:superview)
+                height.is(30)
+
+                min_left.is 10
+                min_top.is 10
+              end
+            end
           end
         end
       end
