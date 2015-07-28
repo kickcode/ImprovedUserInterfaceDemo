@@ -29,6 +29,17 @@ class AppDelegate
 
     NSColorPanel.sharedColorPanel.target = self
     NSColorPanel.sharedColorPanel.action = 'color_selected:'
+
+    @content_tabs = @layout.get(:content_tabs)
+    NSTimer.scheduledTimerWithTimeInterval(1,
+      target: self,
+      selector: 'redraw_gradients',
+      userInfo: nil,
+      repeats: true)
+  end
+
+  def redraw_gradients
+    @content_tabs.tabViewItems.each { |item| item.view.subviews[0].needsDisplay = true }
   end
 
   def toolbarAllowedItemIdentifiers(toolbar)
