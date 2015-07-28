@@ -65,19 +65,26 @@ class MainLayout < MotionKit::Layout
             wantsLayer true
             backgroundColor colors.delete(colors.shuffle.first)
 
-            add NSTextField, :"tab_view_item_#{number}_label" do
-              bezeled false
-              drawsBackground false
-              editable false
-              selectable false
-              stringValue "Tab Number #{number}"
-
+            add GradientView, :"gradient_#{number}" do
               constraints do
                 width.equals(:superview)
-                height.is(30)
+                height.equals(:superview)
+              end
 
-                min_left.is 10
-                min_top.is 10
+              add NSTextField, :"tab_view_item_#{number}_label" do
+                bezeled false
+                drawsBackground false
+                editable false
+                selectable false
+                stringValue "Tab Number #{number}"
+
+                constraints do
+                  width.equals(:superview)
+                  height.is(30)
+
+                  min_left.is 10
+                  min_top.is 10
+                end
               end
             end
           end
