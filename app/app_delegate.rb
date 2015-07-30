@@ -36,10 +36,21 @@ class AppDelegate
       selector: 'redraw_gradients',
       userInfo: nil,
       repeats: true)
+
+    @sidebar_meter = @layout.get(:sidebar_meter)
+    NSTimer.scheduledTimerWithTimeInterval(0.1,
+      target: self,
+      selector: 'randomize_meter',
+      userInfo: nil,
+      repeats: true)
   end
 
   def redraw_gradients
     @content_tabs.tabViewItems.each { |item| item.view.subviews[0].needsDisplay = true }
+  end
+
+  def randomize_meter
+    @sidebar_meter.value = rand(100)
   end
 
   def toolbarAllowedItemIdentifiers(toolbar)
