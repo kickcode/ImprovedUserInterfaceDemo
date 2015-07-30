@@ -27,6 +27,24 @@ class MainLayout < MotionKit::Layout
           min_top.is 10
         end
       end
+
+      add Motion::Meter::ThresholdMeter, :sidebar_meter do
+        min_value 0
+        max_value 100
+        value 50
+
+        add_threshold 0, 33, NSColor.redColor
+        add_threshold 33, 66, NSColor.yellowColor
+        add_threshold 66, 100, NSColor.greenColor
+
+        constraints do
+          width.equals(:superview).minus(20)
+          height.is 30
+
+          min_left.is 10
+          min_top.equals(:sidebar_heading).plus(20)
+        end
+      end
     end
     add NSView, :content do
       wantsLayer true
